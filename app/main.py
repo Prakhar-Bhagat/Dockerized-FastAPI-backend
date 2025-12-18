@@ -3,6 +3,17 @@ from fastapi import FastAPI, Request
 from app.database import engine, Base
 from app.routers import users, posts
 
+tags_metadata = [
+    {
+        "name": "Users",
+        "description": "Operations with **users**. The **login** logic is also here.",
+    },
+    {
+        "name": "Posts",
+        "description": "Manage posts. One user can own _multiple_ posts.",
+    },
+]
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -10,7 +21,13 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-app = FastAPI()
+app = FastAPI(
+    title="Blog API",
+    description="A robust API for managing users and posts. Built with **FastAPI** and **PostgreSQL**.",
+    version="1.0.0",
+    
+    openapi_tags=tags_metadata # Apply the tag descriptions
+)
 
 
 @app.on_event("startup")
