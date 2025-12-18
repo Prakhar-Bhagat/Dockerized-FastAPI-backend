@@ -7,7 +7,7 @@ from jose import JWTError, jwt
 from app import database, models
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("JWT_ALGORITHM")
+ALGORITHM = os.getenv("JWT_ALGORITHM","HS256")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
