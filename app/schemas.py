@@ -1,7 +1,6 @@
 from pydantic import BaseModel
-from typing import List, Optional
 
-# --- Post Schemas ---
+# Post Schemas 
 class PostBase(BaseModel):
     title: str
     content: str
@@ -15,7 +14,7 @@ class PostResponse(PostBase):
     class Config:
         from_attributes = True
 
-# --- User Schemas ---
+# User Schemas 
 class UserBase(BaseModel):
     username: str
     email: str

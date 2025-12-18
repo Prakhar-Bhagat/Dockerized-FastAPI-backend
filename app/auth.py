@@ -11,7 +11,7 @@ ALGORITHM = "HS256"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
-# Hashing Helpers
+# Hashing
 def verify_password(plain, hashed):
     return pwd_context.verify(plain, hashed)
 
@@ -25,7 +25,7 @@ def create_access_token(data: dict):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-# Dependency to protect routes
+# to protect routes
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(database.get_db)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])

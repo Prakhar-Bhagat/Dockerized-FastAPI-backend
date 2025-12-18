@@ -4,7 +4,7 @@ from typing import List
 from app import schemas, models, database, auth
 
 router = APIRouter(
-    prefix="/posts", # All endpoints here will start with /posts
+    prefix="/posts",
     tags=["Posts"]
 )
 

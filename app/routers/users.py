@@ -4,7 +4,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app import schemas, models, database, auth
 
-# Create a logger for this specific file
 logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["Users"])
@@ -12,11 +11,9 @@ router = APIRouter(tags=["Users"])
 @router.post("/signup", status_code=status.HTTP_201_CREATED)
 def signup(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     logger.info(f"Attempting to create user: {user.email}") # <--- Log entry
-    # Check existing
     if db.query(models.User).filter(models.User.email == user.email).first():
         raise HTTPException(status_code=400, detail="Email registered")
     
-    # Hash password & Save
     hashed_pw = auth.get_password_hash(user.password)
     new_user = models.User(email=user.email, username=user.username, hashed_password=hashed_pw)
     db.add(new_user)
@@ -40,6 +37,5 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         )
     
     logger.info(f"User logged in: {user.email}")
-    # Create the token
     access_token = auth.create_access_token(data={"sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
