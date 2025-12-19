@@ -92,7 +92,7 @@ This project uses `pytest` and an in-memory SQLite database to run isolated test
 
 ```bash
 pytest -v
-
+```
 ---
 
 ## 📚 API Endpoints
