@@ -104,7 +104,6 @@ pytest -v
 ### Posts
 * `GET /posts/`: Retrieve all posts.
 * `POST /posts/`: Create a new post (Auth required).
-* `GET /my-posts/`: Retrieve posts for the current logged-in user.
 
 # --------------------------------------------->
 
